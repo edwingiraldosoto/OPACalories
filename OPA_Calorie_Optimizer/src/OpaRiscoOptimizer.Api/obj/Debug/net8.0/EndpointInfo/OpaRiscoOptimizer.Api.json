@@ -1,0 +1,206 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpaRiscoOptimizer.Api",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/ejemplo": {
+      "get": {
+        "tags": [
+          "ControladorOptimizacion"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitudOptimizacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitudOptimizacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolicitudOptimizacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/optimizar": {
+      "post": {
+        "tags": [
+          "ControladorOptimizacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudOptimizacion"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudOptimizacion"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudOptimizacion"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaOptimizacion"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaOptimizacion"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaOptimizacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "OpaRiscoOptimizer.Api"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ElementoEntradaOptimizacion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "pesoKg": {
+            "type": "number",
+            "format": "double"
+          },
+          "calorias": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ElementoSeleccionadoOptimizacion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "pesoKg": {
+            "type": "number",
+            "format": "double"
+          },
+          "calorias": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RespuestaOptimizacion": {
+        "type": "object",
+        "properties": {
+          "esFactible": {
+            "type": "boolean"
+          },
+          "pesoTotalKg": {
+            "type": "number",
+            "format": "double"
+          },
+          "caloriasTotales": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "elementosSeleccionados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementoSeleccionadoOptimizacion"
+            },
+            "nullable": true
+          },
+          "algoritmo": {
+            "type": "string",
+            "nullable": true
+          },
+          "escaladoPeso": {
+            "type": "string",
+            "nullable": true
+          },
+          "notas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitudOptimizacion": {
+        "type": "object",
+        "properties": {
+          "minCalorias": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoMaximoKg": {
+            "type": "number",
+            "format": "double"
+          },
+          "elementos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementoEntradaOptimizacion"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

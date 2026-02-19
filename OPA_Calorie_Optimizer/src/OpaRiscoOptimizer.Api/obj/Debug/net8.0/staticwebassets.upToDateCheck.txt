@@ -1,0 +1,4 @@
+wwwroot\styles.css
+wwwroot\images\logo-opa.png
+wwwroot\app.js
+wwwroot\index.html
